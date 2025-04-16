@@ -4,12 +4,22 @@ using UnityEngine;
 
 public static class Extensions
 {
-    public static T Pop<T>(this List<T> list)
+    /// <summary>
+    /// Removes and returns the element at the specified index. Defaults to the last item.
+    /// Supports negative indexing (e.g., -1 for last, -2 for second last).
+    /// </summary>
+    public static T Pop<T>(this List<T> list, int index = -1)
     {
-        if (list.Count == 0) throw new Exception("Cannot pop from an empty list.");
-        T lastElement = list[^1];
-        list.RemoveAt(list.Count - 1);
-        return lastElement;
+        if (index < 0) index = list.Count + index;
+
+        if (index < 0 || index >= list.Count)
+        {
+            throw new ArgumentOutOfRangeException(nameof(index), "Index out of range.");
+        }
+
+        T value = list[index];
+        list.RemoveAt(index);
+        return value;
     }
 
     public static Vector3 CalcLocalPosition(this Transform transform, Vector3 worldPosition)
