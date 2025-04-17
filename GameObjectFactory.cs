@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEditor;
 using System;
 
-public class GameObjectsFactory
+public class GameObjectFactory
 {
     [MenuItem("GameObject/UI/Background", false)]
     public static void CreateBackground(MenuCommand command)
