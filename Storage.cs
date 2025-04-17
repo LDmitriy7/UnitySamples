@@ -3,7 +3,7 @@ using UnityEngine;
 public static class Storage
 {
     readonly public static StorageData Data = new();
-    const string STORAGE_KEY = "storage";
+    private const string STORAGE_KEY = "storage";
 
     public static void Save()
     {
