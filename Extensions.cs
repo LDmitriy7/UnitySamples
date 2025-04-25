@@ -32,4 +32,21 @@ public static class Extensions
     {
         return new Vector2Int(Mathf.Abs(vector.x), Mathf.Abs(vector.y));
     }
+
+    public static void LocalTranslate(this Transform transform, Vector3 translation, Space space)
+    {
+        switch (space)
+        {
+            case Space.Self:
+                translation = transform.localRotation * translation;
+                break;
+            case Space.World:
+                break;
+            default:
+                throw new Exception($"Unknown space: {space}");
+        }
+
+        transform.localPosition += translation;
+    }
+
 }
