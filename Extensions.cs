@@ -49,4 +49,41 @@ public static class Extensions
         transform.localPosition += translation;
     }
 
+    /// <summary>
+    /// Converts any sequence to a string like [item1, item2, item3].
+    /// Strings will be quoted; nulls will be rendered as "null".
+    /// </summary>
+    public static string ToPrettyString<T>(this IEnumerable<T> sequence)
+    {
+        if (sequence == null)
+            return "null";
+
+        var builder = new StringBuilder();
+        builder.Append("[");
+
+        var first = true;
+        foreach (var item in sequence)
+        {
+            if (!first)
+                builder.Append(", ");
+
+            switch (item)
+            {
+                case string s:
+                    builder.Append($"\"{s}\"");
+                    break;
+                case null:
+                    builder.Append("null");
+                    break;
+                default:
+                    builder.Append(item);
+                    break;
+            }
+
+            first = false;
+        }
+
+        builder.Append("]");
+        return builder.ToString();
+    }
 }
